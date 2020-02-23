@@ -137,6 +137,18 @@ iframe {
   color: #e5e5e5;
   line-height: 1.5;
 }
+.txt2 {
+  font-family: SourceSansPro-Regular;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #4b2354;
+}
+
+.hov1:hover {
+  color: #4b2354;
+  text-decoration: underline;
+}
+
 
 
 /*//////////////////////////////////////////////////////////////////
