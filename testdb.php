@@ -25,8 +25,8 @@ $servername = "127.0.0.1";
 $username = "root";
 $password = "system91";
 $dbname = "Users";
-$givenroll = "'" . $_POST[rollno] . "'";
-$givenpass = "'" . $_POST[password] . "'";
+$givenroll = "'" . $_POST['rollno'] . "'";
+$givenpass = "'" . $_POST['password'] . "'";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
