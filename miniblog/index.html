@@ -1,268 +1,3 @@
-<!DOCTYPE html>
-<html>
-<title>Logged In!</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/w3css1.css">
-<link rel="stylesheet" href="css/googleapicss.css">
-<style>
-body,h1 {font-family: "Arial", sans-serif}
-body, html {height: 100%}
-.bgimg { 
-  background-image: url('images/bg-03.jpg');
-  min-height: 100%;
-  background-position: center;
-  background-size: cover;
-}
-/* The navigation bar */
-.navbar {
-  overflow: hidden;
-  background-color: #333;
-  position: fixed; /* Set the navbar to fixed position */
-  top: 0;
-  left: 0;
-  right: 0; /* Position the navbar at the top of the page */
-  width: 100%;
-  margin-right: 0; /* Full width */
-}
-
-/* Links inside the navbar */
-.navbar a {
-  float: right;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  margin: auto;
-}
-
-.navbar b {
-  font: sans-serif;
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: left;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-/* Change background on mouse-over */
-.navbar a:hover {
-  background: #ddd;
-  color: black;
-}
-
-.navbar b:hover {
-  background: #ddd;
-  color: black;
-}
-
-/* Main content */
-.main {
-  margin: auto;
-  margin-top: 30px;
-  padding: 0; /* Add a top margin to avoid content overlay */
-}
-
-</style>
-<div class="navbar">
-  <b href="#home">Home</b>
-  <a href="index.html">Logout</a>
-  <!--<a href="#contact">Contact</a> -->
-</div>
-<body style="padding-right: 0px;padding-left: 0px;">
-
-
-
-<?php
-error_reporting(E_ERROR | E_PARSE);
-$servername = "127.0.0.1";
-$username = "root";
-$password = "system91";
-$dbname = "Users";
-$givenroll = "'" . $_POST['rollno'] . "'";
-$givenpass = "'" . $_POST['password'] . "'";
-
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-
-$sql = "SELECT firstname, lastname FROM Users WHERE rollno=$givenroll AND password=$givenpass";
-
-$result = $conn->query($sql);
-
-?>
-<div class="bgimg w3-display-container w3-animate-opacity w3-text-white main">
-  <div class="w3-display-middle">
-  	<?php
-  		if($result->num_rows > 0){
-  			?>
-  			<h1 class="w3-jumbo w3-animate-top">WELCOME</h1>
-    		<hr class="w3-border-grey" style="margin:auto;width:40%">
-    		<p class="w3-large w3-center">
-          <br>
-    			<?php
-    				while($row = $result->fetch_assoc()) {
-    					echo  $row["firstname"]. " " . $row["lastname"];
-    				}
-    			?>
-    		</p>
-    	<?php
-  		}
-  		else{
-  			?>
-  			<h1 class="w3-jumbo w3-animate-top">SORRY!</h1>
-    		<hr class="w3-border-grey" style="margin:auto;width:40%">
-    		<p class="w3-large w3-center">Invalid Credentials</p>
-    		<?php
-  		}
-  	?>
-  </div>
-</div>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html>
-<head>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-* {
-  box-sizing: margin-box;
-  padding-right: 0;
-  padding-left: 0;
-  margin: auto;
-  left: 0;
-
-}
-
-/* Add a gray background color with some padding */
-body {
-  font-family: Arial;
-  padding: 20px;
-  background: #828384;
-}
-
-/* Header/Blog Title */
-.header {
-  padding: 30px;
-  font-size: 40px;
-  text-align: center;
-  background: white;
-}
-
-/* Create two unequal columns that floats next to each other */
-/* Left column */
-.leftcolumn {   
-  float: left;
-  width: 75%;
-}
-
-/* Right column */
-.rightcolumn {
-  float: left;
-  width: 25%;
-  padding-left: 20px;
-}
-
-/* Fake image */
-.fakeimg {
-  background-color: #aaa;
-  width: 100%;
-  padding: 20px;
-}
-
-/* Add a card effect for articles */
-.card {
-   background-color: white;
-   padding: 20px;
-   margin-top: 20px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Footer */
-.footer {
-  padding: 20px;
-  text-align: center;
-  background: #ddd;
-  margin-top: 20px;
-}
-
-/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 9900px) {
-  .leftcolumn, .rightcolumn {   
-    padding-right: 0;
-    padding-left: 0;
-    width: 100%;
-    padding: 0;
-  }
-}
-</style>
-</head>
-<body>
-
-<div class="header">
-  <h2>Blog Name</h2>
-</div>
-
-<div class="row">
-  <div class="leftcolumn">
-    <div class="card">
-      <h2>TITLE HEADING</h2>
-      <h5>Title description, Dec 7, 2017</h5>
-      <div class="fakeimg" style="height:200px;">Image</div>
-      <p>Some text..</p>
-      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-    </div>
-    <div class="card">
-      <h2>TITLE HEADING</h2>
-      <h5>Title description, Sep 2, 2017</h5>
-      <div class="fakeimg" style="height:200px;">Image</div>
-      <p>Some text..</p>
-      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-    </div>
-  </div>
-  <div class="rightcolumn">
-    <div class="card">
-      <h2>About Me</h2>
-      <div class="fakeimg" style="height:100px;">Image</div>
-      <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-    </div>
-    <div class="card">
-      <h3>Popular Post</h3>
-      <div class="fakeimg">Image</div><br>
-      <div class="fakeimg">Image</div><br>
-      <div class="fakeimg">Image</div>
-    </div>
-    <div class="card">
-      <h3>Follow Me</h3>
-      <p>Some text..</p>
-    </div>
-  </div>
-</div>
-
-<div class="footer">
-  <h2>Footer</h2>
-</div>
-
-</body>
-</html>
-
-
-<!--
  <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -309,18 +44,18 @@ body {
           </div>
 
           <div class="col-4 site-logo">
-            <a href="miniblog/index.html" class="text-black h2 mb-0">Mini Blog</a>
+            <a href="index.html" class="text-black h2 mb-0">Mini Blog</a>
           </div>
 
           <div class="col-8 text-right">
             <nav class="site-navigation" role="navigation">
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
-                <li><a href="miniblog/category.html">Home</a></li>
-                <li><a href="miniblog/category.html">Politics</a></li>
-                <li><a href="miniblog/category.html">Tech</a></li>
-                <li><a href="miniblog/category.html">Entertainment</a></li>
-                <li><a href="miniblog/category.html">Travel</a></li>
-                <li><a href="miniblog/category.html">Sports</a></li>
+                <li><a href="category.html">Home</a></li>
+                <li><a href="category.html">Politics</a></li>
+                <li><a href="category.html">Tech</a></li>
+                <li><a href="category.html">Entertainment</a></li>
+                <li><a href="category.html">Travel</a></li>
+                <li><a href="category.html">Sports</a></li>
                 <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span class="icon-search"></span></a></li>
               </ul>
             </nav>
@@ -335,14 +70,14 @@ body {
       <div class="container">
         <div class="row align-items-stretch retro-layout-2">
           <div class="col-md-4">
-            <a href="miniblog/single.html" class="h-entry mb-30 v-height gradient" style="background-image: url('miniblog/images/img_1.jpg');">
+            <a href="single.html" class="h-entry mb-30 v-height gradient" style="background-image: url('images/img_1.jpg');">
               
               <div class="text">
                 <h2>The AI magically removes moving objects from videos.</h2>
                 <span class="date">July 19, 2019</span>
               </div>
             </a>
-            <a href="miniblog/single.html" class="h-entry v-height gradient" style="background-image: url('miniblog/images/img_2.jpg');">
+            <a href="single.html" class="h-entry v-height gradient" style="background-image: url('images/img_2.jpg');">
               
               <div class="text">
                 <h2>The AI magically removes moving objects from videos.</h2>
@@ -351,7 +86,7 @@ body {
             </a>
           </div>
           <div class="col-md-4">
-            <a href="miniblog/single.html" class="h-entry img-5 h-100 gradient" style="background-image: url('miniblog/images/img_v_1.jpg');">
+            <a href="single.html" class="h-entry img-5 h-100 gradient" style="background-image: url('images/img_v_1.jpg');">
               
               <div class="text">
                 <div class="post-categories mb-3">
@@ -364,14 +99,14 @@ body {
             </a>
           </div>
           <div class="col-md-4">
-            <a href="miniblog/single.html" class="h-entry mb-30 v-height gradient" style="background-image: url('miniblog/images/img_3.jpg');">
+            <a href="single.html" class="h-entry mb-30 v-height gradient" style="background-image: url('images/img_3.jpg');">
               
               <div class="text">
                 <h2>The 20 Biggest Fintech Companies In America 2019</h2>
                 <span class="date">July 19, 2019</span>
               </div>
             </a>
-            <a href="miniblog/single.html" class="h-entry v-height gradient" style="background-image: url('miniblog/images/img_4.jpg');">
+            <a href="single.html" class="h-entry v-height gradient" style="background-image: url('images/img_4.jpg');">
               
               <div class="text">
                 <h2>The 20 Biggest Fintech Companies In America 2019</h2>
@@ -393,13 +128,13 @@ body {
         <div class="row">
           <div class="col-lg-4 mb-4">
             <div class="entry2">
-              <a href="miniblog/single.html"><img src="miniblog/images/img_1.jpg" alt="Image" class="img-fluid rounded"></a>
+              <a href="single.html"><img src="images/img_1.jpg" alt="Image" class="img-fluid rounded"></a>
               <div class="excerpt">
               <span class="post-category text-white bg-secondary mb-3">Politics</span>
 
-              <h2><a href="miniblog/single.html">The AI magically removes moving objects from videos.</a></h2>
+              <h2><a href="single.html">The AI magically removes moving objects from videos.</a></h2>
               <div class="post-meta align-items-center text-left clearfix">
-                <figure class="author-figure mb-0 mr-3 float-left"><img src="miniblog/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
+                <figure class="author-figure mb-0 mr-3 float-left"><img src="images/person_1.jpg" alt="Image" class="img-fluid"></figure>
                 <span class="d-inline-block mt-1">By <a href="#">Carrol Atkinson</a></span>
                 <span>&nbsp;-&nbsp; July 19, 2019</span>
               </div>
@@ -411,13 +146,13 @@ body {
           </div>
           <div class="col-lg-4 mb-4">
             <div class="entry2">
-              <a href="miniblog/single.html"><img src="miniblog/images/img_2.jpg" alt="Image" class="img-fluid rounded"></a>
+              <a href="single.html"><img src="images/img_2.jpg" alt="Image" class="img-fluid rounded"></a>
               <div class="excerpt">
               <span class="post-category text-white bg-success mb-3">Nature</span>
 
-              <h2><a href="miniblog/single.html">The AI magically removes moving objects from videos.</a></h2>
+              <h2><a href="single.html">The AI magically removes moving objects from videos.</a></h2>
               <div class="post-meta align-items-center text-left clearfix">
-                <figure class="author-figure mb-0 mr-3 float-left"><img src="miniblog/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
+                <figure class="author-figure mb-0 mr-3 float-left"><img src="images/person_1.jpg" alt="Image" class="img-fluid"></figure>
                 <span class="d-inline-block mt-1">By <a href="#">Carrol Atkinson</a></span>
                 <span>&nbsp;-&nbsp; July 19, 2019</span>
               </div>
@@ -429,13 +164,13 @@ body {
           </div>
           <div class="col-lg-4 mb-4">
             <div class="entry2">
-              <a href="miniblog/single.html"><img src="miniblog/images/img_3.jpg" alt="Image" class="img-fluid rounded"></a>
+              <a href="single.html"><img src="images/img_3.jpg" alt="Image" class="img-fluid rounded"></a>
               <div class="excerpt">
               <span class="post-category text-white bg-warning mb-3">Travel</span>
 
-              <h2><a href="miniblog/single.html">The AI magically removes moving objects from videos.</a></h2>
+              <h2><a href="single.html">The AI magically removes moving objects from videos.</a></h2>
               <div class="post-meta align-items-center text-left clearfix">
-                <figure class="author-figure mb-0 mr-3 float-left"><img src="miniblog/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
+                <figure class="author-figure mb-0 mr-3 float-left"><img src="images/person_1.jpg" alt="Image" class="img-fluid"></figure>
                 <span class="d-inline-block mt-1">By <a href="#">Carrol Atkinson</a></span>
                 <span>&nbsp;-&nbsp; July 19, 2019</span>
               </div>
@@ -449,13 +184,13 @@ body {
 
           <div class="col-lg-4 mb-4">
             <div class="entry2">
-              <a href="miniblog/single.html"><img src="miniblog/images/img_1.jpg" alt="Image" class="img-fluid rounded"></a>
+              <a href="single.html"><img src="images/img_1.jpg" alt="Image" class="img-fluid rounded"></a>
               <div class="excerpt">
               <span class="post-category text-white bg-secondary mb-3">Politics</span>
 
-              <h2><a href="miniblog/single.html">The AI magically removes moving objects from videos.</a></h2>
+              <h2><a href="single.html">The AI magically removes moving objects from videos.</a></h2>
               <div class="post-meta align-items-center text-left clearfix">
-                <figure class="author-figure mb-0 mr-3 float-left"><img src="miniblog/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
+                <figure class="author-figure mb-0 mr-3 float-left"><img src="images/person_1.jpg" alt="Image" class="img-fluid"></figure>
                 <span class="d-inline-block mt-1">By <a href="#">Carrol Atkinson</a></span>
                 <span>&nbsp;-&nbsp; July 19, 2019</span>
               </div>
@@ -467,13 +202,13 @@ body {
           </div>
           <div class="col-lg-4 mb-4">
             <div class="entry2">
-              <a href="miniblog/single.html"><img src="miniblog/images/img_2.jpg" alt="Image" class="img-fluid rounded"></a>
+              <a href="single.html"><img src="images/img_2.jpg" alt="Image" class="img-fluid rounded"></a>
               <div class="excerpt">
               <span class="post-category text-white bg-success mb-3">Nature</span>
 
-              <h2><a href="miniblog/single.html">The AI magically removes moving objects from videos.</a></h2>
+              <h2><a href="single.html">The AI magically removes moving objects from videos.</a></h2>
               <div class="post-meta align-items-center text-left clearfix">
-                <figure class="author-figure mb-0 mr-3 float-left"><img src="miniblog/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
+                <figure class="author-figure mb-0 mr-3 float-left"><img src="images/person_1.jpg" alt="Image" class="img-fluid"></figure>
                 <span class="d-inline-block mt-1">By <a href="#">Carrol Atkinson</a></span>
                 <span>&nbsp;-&nbsp; July 19, 2019</span>
               </div>
@@ -485,13 +220,13 @@ body {
           </div>
           <div class="col-lg-4 mb-4">
             <div class="entry2">
-              <a href="miniblog/single.html"><img src="miniblog/images/img_4.jpg" alt="Image" class="img-fluid rounded"></a>
+              <a href="single.html"><img src="images/img_4.jpg" alt="Image" class="img-fluid rounded"></a>
               <div class="excerpt">
               <span class="post-category text-white bg-danger mb-3">Sports</span>
 
-              <h2><a href="miniblog/single.html">The AI magically removes moving objects from videos.</a></h2>
+              <h2><a href="single.html">The AI magically removes moving objects from videos.</a></h2>
               <div class="post-meta align-items-center text-left clearfix">
-                <figure class="author-figure mb-0 mr-3 float-left"><img src="miniblog/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
+                <figure class="author-figure mb-0 mr-3 float-left"><img src="images/person_1.jpg" alt="Image" class="img-fluid"></figure>
                 <span class="d-inline-block mt-1">By <a href="#">Carrol Atkinson</a></span>
                 <span>&nbsp;-&nbsp; July 19, 2019</span>
               </div>
@@ -505,13 +240,13 @@ body {
 
           <div class="col-lg-4 mb-4">
             <div class="entry2">
-              <a href="miniblog/single.html"><img src="miniblog/images/img_1.jpg" alt="Image" class="img-fluid rounded"></a>
+              <a href="single.html"><img src="images/img_1.jpg" alt="Image" class="img-fluid rounded"></a>
               <div class="excerpt">
               <span class="post-category text-white bg-success mb-3">Nature</span>
 
-              <h2><a href="miniblog/single.html">The AI magically removes moving objects from videos.</a></h2>
+              <h2><a href="single.html">The AI magically removes moving objects from videos.</a></h2>
               <div class="post-meta align-items-center text-left clearfix">
-                <figure class="author-figure mb-0 mr-3 float-left"><img src="miniblog/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
+                <figure class="author-figure mb-0 mr-3 float-left"><img src="images/person_1.jpg" alt="Image" class="img-fluid"></figure>
                 <span class="d-inline-block mt-1">By <a href="#">Carrol Atkinson</a></span>
                 <span>&nbsp;-&nbsp; July 19, 2019</span>
               </div>
@@ -523,14 +258,14 @@ body {
           </div>
           <div class="col-lg-4 mb-4">
             <div class="entry2">
-              <a href="miniblog/single.html"><img src="miniblog/images/img_2.jpg" alt="Image" class="img-fluid rounded"></a>
+              <a href="single.html"><img src="images/img_2.jpg" alt="Image" class="img-fluid rounded"></a>
               <div class="excerpt">
               <span class="post-category text-white bg-danger mb-3">Sports</span>
               <span class="post-category text-white bg-secondary mb-3">Tech</span>
 
-              <h2><a href="miniblog/single.html">The AI magically removes moving objects from videos.</a></h2>
+              <h2><a href="single.html">The AI magically removes moving objects from videos.</a></h2>
               <div class="post-meta align-items-center text-left clearfix">
-                <figure class="author-figure mb-0 mr-3 float-left"><img src="miniblog/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
+                <figure class="author-figure mb-0 mr-3 float-left"><img src="images/person_1.jpg" alt="Image" class="img-fluid"></figure>
                 <span class="d-inline-block mt-1">By <a href="#">Carrol Atkinson</a></span>
                 <span>&nbsp;-&nbsp; July 19, 2019</span>
               </div>
@@ -541,14 +276,14 @@ body {
           </div>
           <div class="col-lg-4 mb-4">
             <div class="entry2">
-              <a href="miniblog/single.html"><img src="miniblog/images/img_4.jpg" alt="Image" class="img-fluid rounded"></a>
+              <a href="single.html"><img src="images/img_4.jpg" alt="Image" class="img-fluid rounded"></a>
               <div class="excerpt">
               <span class="post-category text-white bg-danger mb-3">Sports</span>
               <span class="post-category text-white bg-warning mb-3">Lifestyle</span>
 
-              <h2><a href="miniblog/single.html">The AI magically removes moving objects from videos.</a></h2>
+              <h2><a href="single.html">The AI magically removes moving objects from videos.</a></h2>
               <div class="post-meta align-items-center text-left clearfix">
-                <figure class="author-figure mb-0 mr-3 float-left"><img src="miniblog/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
+                <figure class="author-figure mb-0 mr-3 float-left"><img src="images/person_1.jpg" alt="Image" class="img-fluid"></figure>
                 <span class="d-inline-block mt-1">By <a href="#">Carrol Atkinson</a></span>
                 <span>&nbsp;-&nbsp; July 19, 2019</span>
               </div>
@@ -580,7 +315,7 @@ body {
         <div class="row align-items-stretch retro-layout">
           
           <div class="col-md-5 order-md-2">
-            <a href="miniblog/single.html" class="hentry img-1 h-100 gradient" style="background-image: url('miniblog/images/img_4.jpg');">
+            <a href="single.html" class="hentry img-1 h-100 gradient" style="background-image: url('images/img_4.jpg');">
               <span class="post-category text-white bg-danger">Travel</span>
               <div class="text">
                 <h2>The 20 Biggest Fintech Companies In America 2019</h2>
@@ -591,7 +326,7 @@ body {
 
           <div class="col-md-7">
             
-            <a href="miniblog/single.html" class="hentry img-2 v-height mb30 gradient" style="background-image: url('miniblog/images/img_1.jpg');">
+            <a href="single.html" class="hentry img-2 v-height mb30 gradient" style="background-image: url('images/img_1.jpg');">
               <span class="post-category text-white bg-success">Nature</span>
               <div class="text text-sm">
                 <h2>The 20 Biggest Fintech Companies In America 2019</h2>
@@ -600,14 +335,14 @@ body {
             </a>
             
             <div class="two-col d-block d-md-flex">
-              <a href="miniblog/single.html" class="hentry v-height img-2 gradient" style="background-image: url('miniblog/images/img_2.jpg');">
+              <a href="single.html" class="hentry v-height img-2 gradient" style="background-image: url('images/img_2.jpg');">
                 <span class="post-category text-white bg-primary">Sports</span>
                 <div class="text text-sm">
                   <h2>The 20 Biggest Fintech Companies In America 2019</h2>
                   <span>February 12, 2019</span>
                 </div>
               </a>
-              <a href="miniblog/single.html" class="hentry v-height img-2 ml-auto gradient" style="background-image: url('miniblog/images/img_3.jpg');">
+              <a href="single.html" class="hentry v-height img-2 ml-auto gradient" style="background-image: url('images/img_3.jpg');">
                 <span class="post-category text-white bg-warning">Lifestyle</span>
                 <div class="text text-sm">
                   <h2>The 20 Biggest Fintech Companies In America 2019</h2>
@@ -649,6 +384,7 @@ body {
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat reprehenderit magnam deleniti quasi saepe, consequatur atque sequi delectus dolore veritatis obcaecati quae, repellat eveniet omnis, voluptatem in. Soluta, eligendi, architecto.</p>
           </div>
           <div class="col-md-3 ml-auto">
+            <!-- <h3 class="footer-heading mb-4">Navigation</h3> -->
             <ul class="list-unstyled float-left mr-5">
               <li><a href="#">About Us</a></li>
               <li><a href="#">Advertise</a></li>
@@ -680,7 +416,9 @@ body {
         <div class="row">
           <div class="col-12 text-center">
             <p>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
               Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
               </p>
           </div>
         </div>
@@ -689,24 +427,20 @@ body {
     
   </div>
 
-  <script src="miniblog/js/jquery-3.3.1.min.js"></script>
-  <script src="miniblog/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="miniblog/js/jquery-ui.js"></script>
-  <script src="miniblog/js/popper.min.js"></script>
-  <script src="miniblog/js/bootstrap.min.js"></script>
-  <script src="miniblog/js/owl.carousel.min.js"></script>
-  <script src="miniblog/js/jquery.stellar.min.js"></script>
-  <script src="miniblog/js/jquery.countdown.min.js"></script>
-  <script src="miniblog/js/jquery.magnific-popup.min.js"></script>
-  <script src="miniblog/js/bootstrap-datepicker.min.js"></script>
-  <script src="miniblog/js/aos.js"></script>
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/jquery.countdown.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/bootstrap-datepicker.min.js"></script>
+  <script src="js/aos.js"></script>
 
-  <script src="miniblog/js/main.js"></script>
+  <script src="js/main.js"></script>
 
 
   </body>
 </html>
-
-
-
--->
